@@ -46,9 +46,6 @@ def regula_falsi(func, a, b, tol=1e-6, max_iter=100):
             b = c
         else:
             a = c
-        
-        c_prev = c 
-
     else: 
         print(f"\nJumlah iterasi maksimum ({max_iter}) tercapai. Akar terakhir: {c:.6f}")
 
