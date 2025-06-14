@@ -2,6 +2,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def regula_falsi(func, a, b, tol=1e-6, max_iter=100):
+    """
+    Implementasi metode Regula Falsi.
+
+    Args:
+        func (function): Fungsi yang akan dicari akarnya, f(x).
+        a (float): Tebakan awal batas bawah.
+        b (float): Tebakan awal batas atas.
+        tol (float): Toleransi error untuk kriteria penghentian.
+        max_iter (int): Jumlah iterasi maksimum.
+
+    Returns:
+        float: Akar fungsi yang ditemukan.
+        list: Daftar tuples (iter, a, b, c, f(a), f(b), f(c), error) untuk logging proses.
+    """
     if func(a) * func(b) >= 0:
         print("Error: f(a) dan f(b) harus memiliki tanda yang berlawanan.")
         return None, []
@@ -19,7 +33,7 @@ def regula_falsi(func, a, b, tol=1e-6, max_iter=100):
         f_b = func(b)
         f_c = func(c)
 
-        error_abs = abs(f_c)
+        error_abs = abs(f_c) 
 
         iter_data.append((i + 1, a, b, c, f_a, f_b, f_c, error_abs))
         print(f"{i + 1:<8} {a:<15.6f} {b:<15.6f} {c:<15.6f} {f_a:<15.6f} {f_b:<15.6f} {f_c:<15.6f} {error_abs:<15.6e}")
@@ -41,6 +55,9 @@ def regula_falsi(func, a, b, tol=1e-6, max_iter=100):
     return c, iter_data
 
 def plot_function_and_root(func, root, a_initial, b_initial, iter_data=None):
+    """
+    Membuat plot fungsi dan akar yang ditemukan.
+    """
     x = np.linspace(min(a_initial, root) - 1, max(b_initial, root) + 1, 400)
     y = func(x)
 
@@ -65,7 +82,6 @@ def plot_function_and_root(func, root, a_initial, b_initial, iter_data=None):
     plt.legend()
     plt.show()
 
-# --- Contoh Penggunaan ---
 if __name__ == "__main__":
     def my_function(x):
         return x**3 - 2*x - 5
